@@ -70,10 +70,18 @@ public class QuerstionController {
 		return "redirect:/questions/" + id;
 	}
 	@DeleteMapping("/{id}")
-	public String deleteQuestionById(@PathVariable(value = "id") Long id, Model model) {
+	public String deleteQuestionById(@PathVariable(value = "id") Long id, Model model, HttpSession session) {
+		User user = (User)session.getAttribute("user");
+		long uId = user.getId();
 		Question question = questionService.getQuestionById(id);
-		questionService.deleteQuestion(question);
-		model.addAttribute("userId", question.getWriter().getUserId());
+		long qId = question.getWriter().getId();
+		if(qId==uId) {
+			questionService.deleteQuestion(question);
+			model.addAttribute("userId", question.getWriter().getUserId());
+			model.addAttribute("message", "삭제완료");
+		}else {
+			model.addAttribute("message", "삭제권한x");
+		}
 		return "/questions/withdrawal";
 	}
 }

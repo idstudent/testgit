@@ -37,9 +37,12 @@
                                 <li th:if="${session.user}" class="nav-item">
                                     <a class="nav-link" href="/questions">Questions</a>
                                 </li>
+                         		<li th:if="${session.user}" class="nav-item"><a href="/users?pageNo=1" class="nav-link">회원목록</a>
+                         		</li>
+                       			
                                 <li th:if="${session.user}" class="nav-item">
                                		<a class="nav-link" th:href="@{'/users/{id}'(id=${session.user.id})}" >
-                                   <span th:text="${session.user.userId}"></span>님 Info</a>
+                                   <span th:text="${session.user.userId}"></span>�떂 Info</a>
                                 </li>
                                 <li th:if="${session.user}" class="nav-item">
                                     <a class="nav-link" href="/logout">Log-Out</a>

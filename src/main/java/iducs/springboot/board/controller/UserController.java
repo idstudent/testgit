@@ -28,11 +28,14 @@ public class UserController {
 	public String createUser(@Valid User formUser, Model model) {
 		userService.saveUser(formUser); 
 		model.addAttribute("user", formUser);
-		return "redirect:/users";
+		return "users/welcome";
 	}	
 	@GetMapping("")
 	public String getUsers(Model model, HttpSession session, Long pageNo) { //@PathVariable(value = "pageNo") Long pageNo) {
-		System.out.println(pageNo);
+		User user = (User)session.getAttribute("user");
+		if(user == null) {
+			return "redirect:/";
+		}
 		model.addAttribute("users", userService.getUsers(pageNo));
 		return "/users/list";
 	}	
