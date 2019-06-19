@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import iducs.springboot.board.domain.Question;
 
 @Entity
-@Table(name = "question")
+@Table(name = "question") 
 public class QuestionEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
